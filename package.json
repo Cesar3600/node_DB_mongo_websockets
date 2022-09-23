@@ -1,0 +1,21 @@
+{
+	"name": "server",
+	"version": "0.1.0",
+	"description": "my server",
+	"main": "server.js",
+	"scripts": {
+		"demonio": "nodemon node server.js"
+	},
+	"keywords": [
+		"server",
+		"cesar"
+	],
+	"author": "cesar contreras",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.18.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.19"
+	}
+}

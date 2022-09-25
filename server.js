@@ -24,7 +24,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	console.log(req.query)
 	console.log(req.body)
-	response.error(req, res, 'error en creacion por falta de autorizacion', 401)
+	response.error(
+		req,
+		res,
+		'error inesperado',
+		401,
+		'no se puede dar autorizacion no se ha implementado el modulo de ingreso'
+	)
 })
 
 app.use('/app', express.static('public'))

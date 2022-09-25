@@ -1,14 +1,34 @@
+const response = require('./response')
 const express = require('express')
-
+const bodyParser = require('body-parser')
 const app = express()
-const Router = express.Router()
-const PORT = 4000
-app.use(Router)
+const router = express.Router()
+const PORT = 5000
 
-Router.get('/', (request, response) => {
-	response.send('mensaje de accion!')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(router)
+
+router.get('/', (req, res) => {
+	console.log(req.headers)
+	res.header({
+		'custom-header': 'nuestro valor personalizado'
+	})
+	if (req.query.error == 'ok') {
+		response.error(req, res, 'error simulado', 400)
+	} else {
+		response.success(req, res, 'lista de mensajes', 200)
+	}
 })
 
-app.listen(PORT, () => {
-	console.log(`working on!${PORT}`)
+router.post('/', (req, res) => {
+	console.log(req.query)
+	console.log(req.body)
+	/* 	res.status(201).send([
+		{ error: '', body: 'creado correctamente' },
+		{ data: [] }
+	]) */
+	response.error(req, res, 'error en creacion por falta de autorizacion', 401)
 })
+
+app.listen(PORT, () => console.log(`working on port ${PORT}`))

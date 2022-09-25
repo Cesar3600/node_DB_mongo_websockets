@@ -24,11 +24,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	console.log(req.query)
 	console.log(req.body)
-	/* 	res.status(201).send([
-		{ error: '', body: 'creado correctamente' },
-		{ data: [] }
-	]) */
 	response.error(req, res, 'error en creacion por falta de autorizacion', 401)
 })
+
+app.use('/app', express.static('public'))
 
 app.listen(PORT, () => console.log(`working on port ${PORT}`))

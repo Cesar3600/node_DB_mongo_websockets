@@ -7,23 +7,16 @@ router.get('/', (req, res) => {
 	res.header({
 		'custom-header': 'nuestro valor personalizado'
 	})
-	if (req.query.error == 'ok') {
-		response.error(req, res, 'error simulado', 400)
-	} else {
-		response.success(req, res, 'lista de mensajes', 200)
-	}
+	response.success(req, res, 'todo ok', 202)
 })
 
 router.post('/', (req, res) => {
 	console.log(req.query)
-	console.log(req.body)
-	response.error(
-		req,
-		res,
-		'error inesperado',
-		401,
-		'no se puede dar autorizacion no se ha implementado el modulo de ingreso'
-	)
+	if (req.query.error == 'ok') {
+		response.error(req, res, 'error simulado', 400, 'solo una simulacion')
+	} else {
+		response.success(req, res, 'lista de mensajes', 200)
+	}
 })
 
 module.exports = router

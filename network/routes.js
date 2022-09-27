@@ -2,8 +2,8 @@ const express = require('express')
 
 const message = require('../components/message/network')
 
-const routes = (server) => {
-	server.use('/', message)
+const router = (server) => {
+	server.use('/message', message)
 }
 
-module.exports = routes
+module.exports = router

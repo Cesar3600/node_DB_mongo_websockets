@@ -1,13 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const routes = require('./network/routes')
+const router = require('./network/routes')
 const app = express()
-const PORT = 5000
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-routes(app)
+router(app)
 
 app.use('/app', express.static('public'))
 
-app.listen(PORT, () => console.log(`working on port ${PORT}`))
+app.listen(5000, () => console.log(`working on port 5000!!`))

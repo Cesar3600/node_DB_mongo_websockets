@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const response = require('../../network/response')
 
+//trayendo el controlador
+const controller = require('./controller')
+
 router.get('/', (req, res) => {
 	console.log(req.headers)
 	res.header({
@@ -11,12 +14,21 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	console.log(req.query)
-	if (req.query.error == 'ok') {
-		response.error(req, res, 'error simulado', 400, 'solo una simulacion')
+	controller
+		.addMessage(req.body.user, req.body.message)
+		.then((fullMessage) => {
+			response.success(req, res, fullMessage, 201)
+			console.log(fullMessage)
+		})
+		.catch((e) => {
+			response.error(req, res, e, 400, 'error en el controlador')
+		})
+
+	/* 	if (req.query.error == 'ok') {
+		response.success(req, res, 'creado correctamente', 201)
 	} else {
-		response.success(req, res, 'lista de mensajes', 200)
-	}
+		response.error(req, res, 'error simulado', 400, 'solo una simulacion')
+	} */
 })
 
 module.exports = router
